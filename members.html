@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>جمعية شباب الريف التعاونية للتنمية الزراعية RYCAAD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f7f4ef;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    nav {
+      background-color: #2e7d32;
+      padding: 10px 20px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 5px 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #1b5e20;
+      border-radius: 6px;
+    }
+    .hero-slider img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .container {
+      width: 90%;
+      margin: auto;
+      padding: 20px 0;
+    }
+    .card {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 15px;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .card-body {
+      padding: 10px 0;
+    }
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .card-text {
+      font-size: 14px;
+    }
+    h2 {
+      color: #2e7d32;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .col-md-4 {
+      flex: 1 1 300px;
+      max-width: 32%;
+    }
+    footer {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      text-decoration: none;
+      border: 1px solid #2e7d32;
+      color: #2e7d32;
+      border-radius: 20px;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #2e7d32;
+      color: white;
+    }
+  </style>
+</head><body><img alt="بنر الجمعية" src="banner.jpg" style="width:100%; height:auto;"/><nav>
+<div style="display: flex; align-items: center; justify-content: space-between;">
+
+<ul id="dynamic-nav"></ul>
+</div>
+</nav><main class="container">
+<h1>إدارة الأعضاء</h1>
+<h2>إضافة عضو جديد</h2>
+<form class="member-form" id="memberForm" onsubmit="addMember(event)">
+<input id="name" placeholder="الاسم الكامل" required="" type="text"/>
+<input id="email" placeholder="البريد الإلكتروني" required="" type="email"/>
+<input id="phone" placeholder="رقم الهاتف" required="" type="tel"/>
+<select id="membership">
+<option value="أساسي">عضو أساسي</option>
+<option value="منتسب">عضو منتسب</option>
+<option value="فخري">عضو فخري</option>
+</select>
+<button type="submit">إضافة</button>
+</form>
+<h2>قائمة الأعضاء</h2>
+<h3>🔍 البحث عن عضو</h3>
+<input id="searchInput" onkeyup="filterMembers()" placeholder="ابحث بالاسم أو البريد أو الهاتف" style="width:100%; padding:8px; margin-bottom:10px;" type="text"/>
+<table class="members-table" id="membersTable">
+<thead>
+<tr>
+<th>الاسم الكامل</th>
+<th>البريد الإلكتروني</th>
+<th>الهاتف</th>
+<th>نوع العضوية</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
+<tbody>
+<!-- ستُضاف الصفوف هنا -->
+</tbody>
+</table>
+<script>
+  const navLinks = {
+    admin: [
+      { href: "admin-dashboard.html", text: "لوحة تحكم المشرف" },
+      { href: "dashboard.html", text: "لوحة البيانات (إحصائيات)" },
+      { href: "add-news.html", text: "إضافة خبر / فعالية" },
+      { href: "members.html", text: "إدارة الأعضاء" },
+      { href: "notifications.html", text: "الرسائل / التنبيهات" },
+      { href: "logout.html", text: "تسجيل الخروج" }
+    ]
+  };
+
+  const navContainer = document.getElementById("dynamic-nav");
+  if (navContainer) {
+    const links = navLinks["admin"];
+    navContainer.innerHTML = links.map(link => `<li><a href="${link.href}">${link.text}</a></li>`).join("");
+  }
+</script></main></body></html>

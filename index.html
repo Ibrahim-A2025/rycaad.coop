@@ -1,0 +1,38 @@
+
+<script>
+  const role = localStorage.getItem("role");
+  if (role !== "admin") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<title>الرئيسية</title>
+</head>
+<body><img alt="بنر الجمعية" src="banner.jpg" style="width:100%; height:auto;"/>
+<ul class="nav">
+<li><a href="register.html" id="register-link">تسجيل</a></li>
+<li><a href="login.html" id="login-link">تسجيل الدخول</a></li>
+<li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+</ul>
+<h1>مرحباً بكم في موقع الجمعية</h1>
+<script src="script.js"></script>
+
+<script>
+  const role = localStorage.getItem("userRole");
+  const nav = document.querySelector("nav ul");
+  if (role === "admin") {
+    nav.innerHTML += `<li><a href="admin-dashboard.html">لوحة المشرف</a></li><li><a href="logout.html">تسجيل الخروج</a></li>`;
+  } else if (role === "member") {
+    nav.innerHTML += `<li><a href="#">صفحة العضو</a></li><li><a href="logout.html">تسجيل الخروج</a></li>`;
+  } else {
+    nav.innerHTML += `<li><a href="login.html">تسجيل الدخول</a></li><li><a href="register.html">التسجيل</a></li>`;
+  }
+</script>
+</body>
+
+</html>

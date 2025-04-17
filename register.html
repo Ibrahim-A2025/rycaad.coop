@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>التسجيل - RYCAAD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #f7f4ef; margin: 0; padding: 0; color: #333; }
+    nav { background-color: #2e7d32; padding: 10px 20px; }
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; }
+    nav ul li { margin: 5px 10px; }
+    nav ul li a { color: white; text-decoration: none; padding: 10px 16px; display: inline-block; transition: background-color 0.3s; }
+    nav ul li a:hover { background-color: #1b5e20; border-radius: 6px; }
+    .container { width: 90%; margin: auto; padding: 20px 0; }
+    .card { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 16px; padding: 20px; max-width: 500px; margin: auto; }
+    input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-family: 'Cairo', sans-serif; }
+    button { background-color: #2e7d32; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #1b5e20; }
+    .error { color: red; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="event.html">الرئيسية</a></li>
+      <li><a href="login.html">تسجيل الدخول</a></li>
+      <li><a href="register.html">التسجيل</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h2>التسجيل كعضو جديد</h2>
+      <form id="registerForm">
+        <input type="text" name="name" placeholder="الاسم الكامل" required>
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+        <div style="display: flex; gap: 10px;">
+          <select name="countryCode" required style="flex: 1;">
+            <option value="+966">🇸🇦 +966</option>
+            <option value="+20">🇪🇬 +20</option>
+            <option value="+212">🇲🇦 +212</option>
+            <option value="+971">🇦🇪 +971</option>
+          </select>
+          <input type="tel" name="phone" placeholder="رقم الهاتف" style="flex: 2;" required>
+        </div>
+        <button type="submit">تسجيل</button>
+        <p class="error" id="errorMsg"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzrnP45x6_YDkFYz8KjBmsEFfm0d25E7Tv6tGyNviFxL3QchChlmMyRZP9fz0H45JtHhg/exec";
+    const form = document.getElementById("registerForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorMsg.textContent = "";
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const fullPhone = form.countryCode.value + phone;
+
+      // جلب البيانات من الشيت للتحقق من التكرار
+      const res = await fetch(scriptURL + "?get=true");
+      const data = await res.json();
+      const duplicate = data.find(row => row.email === email || row.phone === fullPhone);
+
+      if (duplicate) {
+        errorMsg.textContent = "البريد أو رقم الهاتف مستخدم مسبقًا.";
+        return;
+      }
+
+      // إرسال البيانات
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", fullPhone);
+      formData.append("date", new Date().toLocaleDateString("ar-EG"));
+      formData.append("status", "عضو");
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(() => {
+          alert("تم التسجيل بنجاح!");
+          form.reset();
+        })
+        .catch(err => {
+          errorMsg.textContent = "حدث خطأ أثناء الإرسال، حاول مرة أخرى.";
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>

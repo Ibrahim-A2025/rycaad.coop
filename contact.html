@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>جمعية شباب الريف التعاونية للتنمية الزراعية RYCAAD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f7f4ef;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    nav {
+      background-color: #2e7d32;
+      padding: 10px 20px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 5px 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #1b5e20;
+      border-radius: 6px;
+    }
+    .hero-slider img {
+      width: 60%;
+      border-radius: 10px;
+    }
+    .container {
+      width: 100%;
+      margin: auto;
+      padding: 20px 0;
+    }
+    .card {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 15px;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .card-body {
+      padding: 10px 0;
+    }
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .card-text {
+      font-size: 14px;
+    }
+    h2 {
+      color: #2e7d32;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .col-md-4 {
+      flex: 1 1 300px;
+      max-width: 32%;
+    }
+    footer {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      text-decoration: none;
+      border: 1px solid #2e7d32;
+      color: #2e7d32;
+      border-radius: 20px;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #2e7d32;
+      color: white;
+    }
+  </style>
+</head><body><img alt="بنر الجمعية" src="banner.jpg" style="width:100%; height:auto; display:block; margin:auto;"/>
+<nav style="background-color:#2e7d32; height:60px; display:flex; align-items:center; justify-content:center;">
+<a href="projects.html" style="color:white; margin:0 15px; text-decoration:none;">المشاريع</a>
+<a href="news.html" style="color:white; margin:0 15px; text-decoration:none;">الأخبار</a>
+<a href="contact.html" style="color:white; margin:0 15px; text-decoration:none;">التواصل</a>
+<a href="logout.html" style="color:white; margin:0 15px; text-decoration:none;">تسجيل الخروج</a>
+</nav>
+<nav>
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<ul id="dynamic-nav"></ul>
+</div>
+</nav><main class="container">
+<h1>التواصل معنا</h1>
+<form action="#" class="contact-form" method="post">
+<label for="name">الاسم</label>
+<input id="name" name="name" placeholder="أدخل اسمك" required="" type="text"/>
+<label for="email">البريد الإلكتروني</label>
+<input id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required="" type="email"/>
+<label for="message">رسالة</label>
+<textarea id="message" name="message" placeholder="أدخل رسالتك" required=""></textarea>
+<button class="btn" type="submit">إرسال</button>
+</form>
+</main><footer>
+<div class="container">
+<p>©  جميع الحقوق محفوظة جمعية شباب الريف التعاونية للتنمية الزراعية 2025</p>
+</div>
+</footer><script>
+    const role = localStorage.getItem("role") || "visitor";
+    const navLinks = {
+      visitor: [
+        { href: "event.html", text: "الرئيسية" },
+        { href: "about.html", text: "من نحن" },
+        { href: "projects.html", text: "المشاريع" },
+        { href: "news.html", text: "الأخبار والفعاليات" },
+        { href: "store.html", text: "المتجر" },
+        visitor: [
+        { href: "event.html", text: "الرئيسية" },
+        { href: "news.html", text: "الأخبار والفعاليات" },
+        { href: "projects.html", text: "المشاريع" },
+        { href: "store.html", text: "المتجر" },
+        { href: "about.html", text: "من نحن" },
+        { href: "login.html", text: "تسجيل الخروج" }
+      ],
+      member: [
+      { href: "admin-dashboard.html", text: "لوحة تحكم المشرف" },
+        { href: "projects.html", text: "المشاريع" },
+        { href: "news.html", text: "الأخبار" },
+        { href: "store.html", text: "المتجر" },
+        { href: "subscribe.html", text: "الاشتراك" }, 
+        { href: "donate.html", text: "تبرع" },  
+        { href: "contact.html", text: "تواصل معنا" },
+        { href: "logout.html", text: "تسجيل الخروج" }
+      ],
+      admin: [
+        { href: "admin-dashboard.html", text: "لوحة تحكم المشرف" },
+        { href: "manage-members.html", text: "إدارة الأعضاء" },
+        { href: "team.html", text: "فريق العمل" },   
+        { href: "news.html", text: "الأخبار والفعاليات" },
+        { href: "logout.html", text: "تسجيل الخروج" }
+        { href: "contact.html", text: "تواصل معنا" },
+        { href: "donate.html", text: "تبرع" },
+        { href: "subscribe.html", text: "الاشتراك" },
+        { href: "team.html", text: "فريق العمل" },
+        { href: "login.html", text: "تسجيل الخروج" }
+      ],
+      member: [
+        { href: "event.html", text: "الرئيسية" },
+        { href: "projects.html", text: "المشاريع" },
+        { href: "news.html", text: "الأخبار" },
+        { href: "store.html", text: "المتجر" },
+        { href: "logout.html", text: "تسجيل الخروج" }
+      ],
+      admin: [
+        { href: "evnt.html", text: "لوحة التحكم" },
+        { href: "manage-members.html", text: "إدارة الأعضاء" },
+        { href: "news.html", text: "الأخبار والفعاليات" },
+        { href: "logout.html", text: "تسجيل الخروج" }
+      ]
+    };
+
+    const navContainer = document.getElementById("dynamic-nav");
+    if (navLinks[role]) {
+      navLinks[role].forEach(link => {
+        navContainer.innerHTML += `<li><a href="${link.href}">${link.text}</a></li>`;
+      });
+    }
+  </script></body></html>

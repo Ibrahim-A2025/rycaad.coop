@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تقويم المناسبات</title>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet"/>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+    main { padding: 20px; }
+    #calendar { margin-top: 20px; direction: rtl; }
+    nav a { text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+<script>
+  const role = localStorage.getItem("role");
+  if (role !== "admin") {
+    window.location.href = "unauthorized.html";
+  }
+
+fetch("https://script.google.com/macros/s/AKfycbzrnP45x6_YDkFYz8KjBmsEFfm0d25E7Tv6tGyNviFxL3QchChlmMyRZP9fz0H45JtHhg/exec")
+  .then(res => res.json())
+  .then(data => {
+    const events = data.map(item => ({
+      title: item.Title,
+      start: item.Date
+    }));
+    calendar.addEventSource(events);
+  });
+
+</script>
+<img alt="بنر الجمعية" src="banner.jpg" style="width:100%; height:auto;"/>
+<header>
+<nav style="background:#388e3c; padding:15px; text-align:center;">
+<a href="admin-dashboard.html" style="margin:0 10px; color:white;">لوحة تحكم المشرف</a>
+<a href="logout.html" style="margin:0 10px; color:white;">تسجيل الخروج</a>
+</nav>
+</header>
+<main class="container">
+<h1 class="text-center">تقويم المناسبات</h1>
+<div id="calendar"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js">
+fetch("https://script.google.com/macros/s/AKfycbzrnP45x6_YDkFYz8KjBmsEFfm0d25E7Tv6tGyNviFxL3QchChlmMyRZP9fz0H45JtHhg/exec")
+  .then(res => res.json())
+  .then(data => {
+    const events = data.map(item => ({
+      title: item.Title,
+      start: item.Date
+    }));
+    calendar.addEventSource(events);
+  });
+
+</script>
+<script src="admin-calendar.js">
+fetch("https://script.google.com/macros/s/AKfycbzrnP45x6_YDkFYz8KjBmsEFfm0d25E7Tv6tGyNviFxL3QchChlmMyRZP9fz0H45JtHhg/exec")
+  .then(res => res.json())
+  .then(data => {
+    const events = data.map(item => ({
+      title: item.Title,
+      start: item.Date
+    }));
+    calendar.addEventSource(events);
+  });
+
+</script>
+<div id="eventModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); z-index:1000;">
+<h3 id="modalTitle">مناسبة جديدة</h3>
+<label>العنوان:</label>
+<input id="eventTitle" style="width:100%; margin-bottom:10px;" type="text"/>
+<label>التاريخ:</label>
+<input id="eventDate" style="width:100%; margin-bottom:10px;" type="date"/>
+<div style="text-align: right;">
+<button onclick="saveEvent()" style="background:#388e3c; color:white; border:none; padding:5px 15px; border-radius:5px;">💾 حفظ</button>
+<button id="deleteBtn" onclick="deleteEvent()" style="background:#d32f2f; color:white; border:none; padding:5px 15px; border-radius:5px; display:none;">🗑️ حذف</button>
+<button onclick="closeModal()" style="background:gray; color:white; border:none; padding:5px 15px; border-radius:5px;">إلغاء</button>
+</div>
+</div>
+<div id="overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:999;"></div>
+
+<script>
+  function logout() {
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
+  }
+
+fetch("https://script.google.com/macros/s/AKfycbzrnP45x6_YDkFYz8KjBmsEFfm0d25E7Tv6tGyNviFxL3QchChlmMyRZP9fz0H45JtHhg/exec")
+  .then(res => res.json())
+  .then(data => {
+    const events = data.map(item => ({
+      title: item.Title,
+      start: item.Date
+    }));
+    calendar.addEventSource(events);
+  });
+
+</script>
+
+</body>
+</html>

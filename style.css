@@ -1,0 +1,146 @@
+/* نمط عام للجسم */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    direction: rtl;
+  }
+  
+  /* الحاوية الأساسية */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* رأس الموقع */
+  header {
+  position: relative;
+  z-index: 1000;
+    background-color: #2e7d32;
+    color: #fff;
+    padding: 15px 0;
+  }
+  header .logo {
+    width: 100px;
+    vertical-align: right;
+  }
+  header nav ul {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+  header nav ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  header nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* البانر */
+  .banner {
+  position: relative;
+  z-index: 1;
+    position: relative;
+    text-align: center;
+    color: #faf6f6;
+  }
+  .banner img {
+    width: 10%;
+    height: 0%;
+  }
+  .banner-text {
+    position: absolute;
+    top: -100%;
+    left: 20%;
+    transform: translate(-40%, -100%);
+  }
+  
+  /* الأقسام الرئيسية */
+  main {
+    padding: 20px 0;
+  }
+  
+  /* نمط للأزرار */
+  .btn {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  /* الأقسام الخاصة بالمنتجات */
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .product {
+    flex: 1 1 calc(33.333% - 20px);
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .product img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* النماذج */
+  form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="number"],
+  form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  form button {
+    margin-top: 10px;
+  }
+  
+  /* التذييل */
+  footer {
+    background-color: #2e7d32;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    direction: ltr;
+  }
+  
+  /* استجابة للجوال */
+  @media (max-width: 768px) {
+    header nav ul li {
+      display: block;
+      margin: 5px 0;
+    }
+  
+    .products {
+      flex-direction: column;
+    }
+  
+    .product {
+      flex: 1 1 100%;
+    }
+  }
+  

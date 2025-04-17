@@ -1,0 +1,13 @@
+{
+  "name": "event-notifier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.3",
+    "twilio": "^4.17.1"
+  }
+}
