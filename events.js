@@ -1,47 +1,65 @@
+let events = JSON.parse(localStorage.getItem("events")) || [];
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const container = document.getElementById("events-list");
+function saveEvents() {
+  localStorage.setItem("events", JSON.stringify(events));
+  displayEvents();
+}
 
-  try {
-    const response = await fetch("/api/events");
-    const events = await response.json();
+function displayEvents() {
+  const tableBody = document.querySelector("#eventsTable tbody");
+  tableBody.innerHTML = "";
 
-    container.innerHTML = "";
+  events.forEach((event, index) => {
+    const row = document.createElement("tr");
 
-    events.forEach((event) => {
-      const eventCard = document.createElement("div");
-      eventCard.className = "event-card";
+    row.innerHTML = `
+      <td>${event.name}</td>
+      <td>${event.date}</td>
+      <td>${event.desc}</td>
+      <td>
+        <button onclick="editEvent(${index})">تعديل</button>
+        <button onclick="deleteEvent(${index})">حذف</button>
+      </td>
+    `;
 
-      const picture = document.createElement("picture");
+    tableBody.appendChild(row);
+  });
+}
 
-      const source = document.createElement("source");
-      source.srcset = event.image_webp;
-      source.type = "image/webp";
+function editEvent(index) {
+  const event = events[index];
+  document.getElementById("eventId").value = index;
+  document.getElementById("eventName").value = event.name;
+  document.getElementById("eventDate").value = event.date;
+  document.getElementById("eventDesc").value = event.desc;
+}
 
-      const img = document.createElement("img");
-      img.src = event.image_fallback;
-      img.alt = event.title;
-      img.className = "event-img";
-
-      picture.appendChild(source);
-      picture.appendChild(img);
-
-      eventCard.innerHTML = `
-        <div class="event-header">
-          <div class="event-title-sm">${event.title}</div>
-        </div>
-        <div class="event-body">
-          <h3 class="event-title">${event.title}</h3>
-          <p class="event-date">${event.date}</p>
-          <p class="event-description">${event.description}</p>
-        </div>
-      `;
-
-      eventCard.prepend(picture);
-      container.appendChild(eventCard);
-    });
-  } catch (error) {
-    console.error("فشل في تحميل الفعاليات:", error);
-    container.innerHTML = "<p>حدث خطأ أثناء تحميل الفعاليات.</p>";
+function deleteEvent(index) {
+  if (confirm("هل أنت متأكد من حذف المناسبة؟")) {
+    events.splice(index, 1);
+    saveEvents();
   }
+}
+
+document.getElementById("eventForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const id = document.getElementById("eventId").value;
+  const name = document.getElementById("eventName").value;
+  const date = document.getElementById("eventDate").value;
+  const desc = document.getElementById("eventDesc").value;
+
+  const newEvent = { name, date, desc };
+
+  if (id === "") {
+    events.push(newEvent);
+  } else {
+    events[parseInt(id)] = newEvent;
+  }
+
+  this.reset();
+  document.getElementById("eventId").value = "";
+  saveEvents();
 });
+
+displayEvents();
